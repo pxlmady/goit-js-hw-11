@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task 4</title>
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: 'Montserrat', sans-serif;
+        margin: 0;
+      }
+
+      .feedback-form {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        max-width: 400px;
+        margin: 20px;
+      }
+
+      .feedback-form label {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .feedback-form button {
+        width: 86px;
+        height: 40px;
+        margin-top: 16px;
+      }
+
+      label {
+        color: #2e2f42;
+        font-size: 16px;
+        font-weight: 500;
+      }
+
+      input {
+        width: 360px;
+        height: 40px;
+        padding: 8px;
+        border: 1px solid #808080;
+        border-radius: 4px;
+      }
+
+      input:hover,
+      textarea:hover {
+        border: 1px solid #000000;
+      }
+
+      input::placeholder,
+      textarea::placeholder {
+        font-family: Montserrat;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+        letter-spacing: 0.04em;
+        text-align: left;
+        color: white;
+      }
+
+      input:focus::placeholder,
+      textarea:focus::placeholder {
+        font-family: Montserrat;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+        letter-spacing: 0.04em;
+        text-align: left;
+        color: #2e2f42;
+      }
+
+      input:focus,
+      textarea:focus {
+        border: 1px solid #808080;
+        outline: none;
+      }
+
+      button {
+        padding: 10px;
+        background-color: #4caf50;
+        color: #ffffff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        color: #fff;
+        font-family: Montserrat;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 24px;
+        letter-spacing: 0.64px;
+        border-radius: 8px;
+        background: #4e75ff;
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #6c8cff;
+      }
+
+      textarea {
+        resize: none;
+        width: 360px;
+        height: 80px;
+        padding: 8px;
+        border: 1px solid #808080;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <p><a href="index.html">Go back</a></p>
+
+    <form class="feedback-form">
+      <label>
+        Email
+        <input
+          type="email"
+          name="email"
+          id="emailInput"
+          autocomplete="username email"
+          placeholder="Type area"
+        />
+      </label>
+      <label>
+        Message
+        <textarea
+          name="message"
+          id="messageInput"
+          rows="8"
+          placeholder="Type area"
+        ></textarea>
+      </label>
+      <button type="submit">Submit</button>
+    </form>
+
+    <script src="./js/2-form.js" type="module"></script>
+  </body>
+</html>
