@@ -4,16 +4,31 @@ import 'izitoast/dist/css/iziToast.min.css';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
+// Отримання елементів сторінки за їх ідентифікаторами
 const searchForm = document.getElementById("searchForm");
 const searchInput = document.getElementById("searchInput");
-const loader = document.getElementById("loader");
 const gallery = document.getElementById("gallery");
-const loadingNotification = document.getElementById("loadingNotification");
 
+// Ключ та базова URL для доступу до API Pixabay
 const apiKey = "41962828-ff4c1ad2c8e7f95d6127e6141";
 const baseUrl = "https://pixabay.com/api/";
 
-// ініціалізація SimpleLightbox з опціями
+// Функція для показу loader
+const showLoader = () => {
+  const loader = document.createElement('span');
+  loader.classList.add('loader');
+  document.body.appendChild(loader); // Додаємо loader до body
+};
+
+// Функція для приховання loader
+const hideLoader = () => {
+  const loader = document.querySelector('.loader');
+  if (loader) {
+    loader.remove();
+  }
+};
+
+// Ініціалізація SimpleLightbox з налаштуваннями
 const lightbox = new SimpleLightbox('.gallery a', {
     captions: true,
     captionSelector: 'img',
@@ -23,22 +38,17 @@ const lightbox = new SimpleLightbox('.gallery a', {
     animationSlide: false,
 });
 
-function showLoader() {
-    loader.style.display = "block";
-}
-
-function hideLoader() {
-    loader.style.display = "none";
-}
-
+// Функція для відображення повідомлення про завантаження
 function showLoadingNotification() {
-  loadingNotification.style.display = "block";
+  iziToast.info({
+    title: "Info",
+    message: "Loading...",
+    position: "topCenter",
+    timeout: 2000,
+  });
 }
 
-function hideLoadingNotification() {
-  loadingNotification.style.display = "none";
-}
-
+// Обробник події для форми пошуку
 searchForm.addEventListener("submit", async function (e) {
     e.preventDefault();
     const searchTerm = searchInput.value.trim();
@@ -49,18 +59,19 @@ searchForm.addEventListener("submit", async function (e) {
     }
 
     try {
-        showLoader();
         showLoadingNotification();
+        showLoader();
 
+        // Запит до API Pixabay для отримання зображень
         const response = await fetch(`${baseUrl}?key=${apiKey}&q=${searchTerm}&image_type=photo&orientation=horizontal&safesearch=true`);
         const data = await response.json();
 
         hideLoader();
-        hideLoadingNotification();
 
         if (data.hits.length === 0) {
             iziToast.info({ title: "Info", message: "Sorry, there are no images matching your search query. Please try again!" });
         } else {
+            // Вивід зображень та інформації про них у галереї
             gallery.innerHTML = "";
 
             data.hits.forEach(image => {
@@ -101,7 +112,6 @@ searchForm.addEventListener("submit", async function (e) {
         }
     } catch (error) {
         hideLoader();
-        hideLoadingNotification();
         iziToast.error({ title: "Error", message: "An error occurred while fetching images. Please try again later." });
         console.error("Error fetching images:", error);
     }
